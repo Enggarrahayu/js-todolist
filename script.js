@@ -37,10 +37,15 @@ function addTaskToUI(taskText, dueDate, completed = false) {
   editBtn.innerText = "✏️";
   editBtn.onclick = () => editTask(span, li);
 
+  const toggleBtn = document.createElement("button");
+  toggleBtn.innerText = "✔";
+  toggleBtn.onclick = () => toggleTask(li);
+
   li.appendChild(span);
   li.appendChild(dateLabel);
   li.appendChild(editBtn);
-  
+  li.appendChild(toggleBtn);
+
   if (completed) li.classList.add("completed");
 
   document.getElementById("taskList").appendChild(li);
@@ -65,4 +70,9 @@ function saveEdit(input, span) {
     input.parentElement.replaceChild(span, input);
     saveTasks();
   }
+}
+
+function toggleTask(li) {
+  li.classList.toggle("completed");
+  saveTasks();
 }
