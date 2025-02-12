@@ -50,9 +50,12 @@ function addTaskToUI(taskText, dueDate, completed = false) {
   li.appendChild(editBtn);
   li.appendChild(toggleBtn);
   li.appendChild(deleteBtn);
-
   if (completed) li.classList.add("completed");
-
+  li.draggable = true;
+  li.ondragstart = dragStart;
+  li.ondragover = dragOver;
+  li.ondrop = drop;
+  
   document.getElementById("taskList").appendChild(li);
 }
 
@@ -84,5 +87,23 @@ function toggleTask(li) {
 
 function deleteTask(li) {
   li.remove();
+  saveTasks();
+}
+
+let draggedItem = null;
+
+function dragStart(event) {
+  draggedItem = event.target;
+  setTimeout(() => (event.target.style.display = "none"), 0);
+}
+
+function dragOver(event) {
+  event.preventDefault();
+}
+
+function drop(event) {
+  event.preventDefault();
+  this.parentNode.insertBefore(draggedItem, this);
+  draggedItem.style.display = "flex";
   saveTasks();
 }
