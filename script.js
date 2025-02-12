@@ -55,7 +55,8 @@ function addTaskToUI(taskText, dueDate, completed = false) {
   li.ondragstart = dragStart;
   li.ondragover = dragOver;
   li.ondrop = drop;
-  
+
+  checkDueDate(li, dueDate);
   document.getElementById("taskList").appendChild(li);
 }
 
@@ -106,4 +107,13 @@ function drop(event) {
   this.parentNode.insertBefore(draggedItem, this);
   draggedItem.style.display = "flex";
   saveTasks();
+}
+
+function checkDueDate(li, dueDate) {
+  if (dueDate) {
+      const today = new Date().toISOString().split("T")[0];
+      if (dueDate < today) {
+          li.classList.add("overdue");
+      }
+  }
 }
