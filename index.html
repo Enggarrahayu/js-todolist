@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive To-Do List</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
             <label for="name">Due Date</label>
             <input type="date" id="taskDate">
         </div>
-        <button onclick="addTask()">+ Add Task</button>
+        <button onclick="addTask()" class="btn-add">+ Add Task</button>
         <ul id="taskList"></ul>
     </div>
 </body>
